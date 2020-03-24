@@ -1,0 +1,35 @@
+{
+  "editor.minimap.enabled": false,
+  "extensions.ignoreRecommendations": false,
+  "workbench.colorTheme": "SynthWave '84",
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.colorCustomizations": {
+      "statusBar.background" : "#A32FE0"
+  },
+  "files.autoSave": "afterDelay",
+  "editor.tabSize": 2,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
+  "vsicons.dontShowNewVersionMessage": true,
+  "phpcs.executablePath": "",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "java.configuration.checkProjectSettingsExclusions": false,
+  "liveServer.settings.donotVerifyTags": true,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "java.home": "C:\\Program Files\\Java\\jdk-13.0.1",
+  "java.help.firstView": "gettingStarted",
+  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
+  "window.zoomLevel": -1,
+  "jshint.options":{
+      "esversion":9
+  },
+  "eslint.options": {
+      "env":{
+          "es6":true
+      },
+      "parserOptions": {
+          "ecmaVersion": 9 // or 7,8,9
+      }
+  }
+}
