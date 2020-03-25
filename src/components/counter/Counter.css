@@ -1,3 +1,7 @@
+body {
+  margin-top: 15px;
+}
+
 button {
   font-size: 16px;
   background-color: green;
@@ -9,4 +13,16 @@ button {
 .count {
   font-size: 16px;
   padding: 15px 30px;
+}
+
+.total {
+  font-size: 50px;
+}
+
+.reset {
+  font-size: 16px;
+  background-color: red;
+  padding: 15px 30px;
+  color: white;
+  width: 200px;
 }
