@@ -109,7 +109,7 @@ class ListToDosComponent extends Component {
             {
               this.state.todos.map (
                 todo =>
-                <tr>
+                <tr key = {todo.id}>
                   <td>{todo.id}</td>
                   <td>{todo.description}</td>
                   <td>{todo.done.toString()}</td>
