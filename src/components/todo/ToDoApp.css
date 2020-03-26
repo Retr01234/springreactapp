@@ -1,0 +1,18 @@
+.error {
+  font-size: 70px;
+  font-weight: 500;
+}
+
+.login {
+  margin: 10px;
+}
+
+.logincre {
+  margin: 0 10px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
