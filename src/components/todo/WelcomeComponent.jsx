@@ -9,10 +9,12 @@ class WelcomeComponent extends Component {
     this.retrieveWelcomeMessage = this.retrieveWelcomeMessage.bind(this);
     
     this.state = {
-      welcomeMessage : ''
+      welcomeMessage : '',
+      errorMessage : ''
     }
 
     this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this);
+    this.handleError = this.handleError.bind(this);
   }
 
   render() {
@@ -31,20 +33,38 @@ class WelcomeComponent extends Component {
 
         <div className="container">
           {this.state.welcomeMessage}
+          {this.state.errorMessage}
         </div>
       </div>
     );
   }
 
   // Method to return Backend Server Message
+
+  // retrieveWelcomeMessage() {
+  //   HelloWorldService.executeHelloWorldService().then(response => this.handleSuccessfulResponse(response));
+  // }
+
+  // retrieveWelcomeMessage() {
+  //   HelloWorldService.executeHelloWorldBeanService().then(response => this.handleSuccessfulResponse(response));
+  // }
+
+  //Our Axios Promise to complete our Async Operation
   retrieveWelcomeMessage() {
-    HelloWorldService.executeHelloWorldService()
-    .then( response => this.handleSuccessfulResponse(response));
+    HelloWorldService.executeHelloWorldPathVar(this.props.match.params.name)
+    .then(response => this.handleSuccessfulResponse(response))
+    .catch(error => this.handleError(error));
   }
 
   handleSuccessfulResponse(response) {
     this.setState({
-      welcomeMessage: response.data
+      welcomeMessage: response.data.message
+    });
+  }
+
+  handleError(error) {
+    this.setState({
+      errorMessage: error.response.data.message
     });
   }
 }
