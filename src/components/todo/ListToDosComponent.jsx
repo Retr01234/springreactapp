@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TodoDataService from '../../api/todo/TodoDataService.js';
 import AuthenticationService from './AuthenticationService.js';
+import moment from 'moment';
 
 class ListToDosComponent extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class ListToDosComponent extends Component {
       message : null
     }
     this.deleteTodoClicked = this.deleteTodoClicked.bind(this);
+    this.updateTodoClicked = this.updateTodoClicked.bind(this);
     this.refreshTodos = this.refreshTodos.bind(this);
   }
 
@@ -38,6 +40,11 @@ class ListToDosComponent extends Component {
     })
   }
 
+  // Update Redirect
+  updateTodoClicked(id) {
+    this.props.history.push(`/list/${id}`);
+  }
+
   // Refresh todos list after a todo has been modified
   refreshTodos() {
     let username = AuthenticationService.getLoggedInUserName();
@@ -59,6 +66,7 @@ class ListToDosComponent extends Component {
                 <th>Description</th>
                 <th>Done?</th>
                 <th>Target Date</th>
+                <th>Update</th>
                 <th>Delete</th>
               </tr>
             </thead>
@@ -70,8 +78,9 @@ class ListToDosComponent extends Component {
                   <tr key = {todo.id}>
                     <td>{todo.id}</td>
                     <td>{todo.description}</td>
+                    <td>{moment(todo.targetDate).format('YYYY-MM-DD')}</td>
                     <td>{todo.done.toString()}</td>
-                    <td>{todo.targetDate.toString()}</td>
+                    <td><button onClick={() => this.updateTodoClicked(todo.id)} className="btn btn-warning">Update</button></td>
                     <td><button onClick={() => this.deleteTodoClicked(todo.id)} className="btn btn-danger">Delete</button></td>
                   </tr>
                 )

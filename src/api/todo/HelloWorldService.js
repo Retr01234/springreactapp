@@ -10,7 +10,7 @@ class HelloWorldService {
     return Axios.get('http://localhost:8080/hello-world-bean');
   }
 
-  executeHelloWorldPathVar(name) {
+  executeHelloWorldPathVariableService(name) {
     return Axios.get(`http://localhost:8080/hello-world/path-variable/${name}`);
   }
 }
