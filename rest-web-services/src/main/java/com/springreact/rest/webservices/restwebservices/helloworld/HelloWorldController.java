@@ -1,4 +1,4 @@
-package com.springreact.rest.webservices.restwebservices;
+package com.springreact.rest.webservices.restwebservices.helloworld;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

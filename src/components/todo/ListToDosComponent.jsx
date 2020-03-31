@@ -1,37 +1,56 @@
 import React, { Component } from 'react';
+import TodoDataService from '../../api/todo/TodoDataService.js';
+import AuthenticationService from './AuthenticationService.js';
 
 class ListToDosComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos : [ // Creating an Array of Tasks
-        {
-          id: 1,
-          description: 'Learn React',
-          done: false,
-          targetDate: new Date()
-        },
-        {
-          id: 2,
-          description: 'Learn Spring Boot',
-          done: false,
-          targetDate: new Date()
-        }, 
-        {
-          id: 3,
-          description: 'Get a Project',
-          done: false,
-          targetDate: new Date()
-        }, 
-      ]
+      todos : [], // Creating an Array of Tasks
+      message : null
     }
+    this.deleteTodoClicked = this.deleteTodoClicked.bind(this);
+    this.refreshTodos = this.refreshTodos.bind(this);
+  }
+
+  componentWillUnmount() { // React Lifecycle Method
+    console.log('componentwillmount');
+  }
+
+  // This method allows your Component to exit the Update life cycle if there is no reason to apply a new render.
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log(nextProps);
+    console.log(nextState);
+    return true;
+  }
+
+  // After all the elements of the page is rendered correctly, this method is called.
+  componentDidMount() { //We made a call to the service and returned the data -- React Lifecycle Method
+    this.refreshTodos();
+  }
+
+  // Delete Function in the front of the backend
+  deleteTodoClicked(id) {
+    let username = AuthenticationService.getLoggedInUserName();
+    TodoDataService.deleteToDo(username, id).then(response => {
+      this.setState({message : `Delete of todo Nr.${id}`});
+      this.refreshTodos();
+    })
+  }
+
+  // Refresh todos list after a todo has been modified
+  refreshTodos() {
+    let username = AuthenticationService.getLoggedInUserName();
+    TodoDataService.retrieveAllTodos(username).then( response => {
+      this.setState({todos : response.data});
+    })
   }
 
   render() {
     return(
       <div>
         <h1>To Do List</h1>
-
+        <div className="alert alert-success">{this.state.message}</div>
         <div className="container">
           <table className="table">
             <thead>
@@ -40,6 +59,7 @@ class ListToDosComponent extends Component {
                 <th>Description</th>
                 <th>Done?</th>
                 <th>Target Date</th>
+                <th>Delete</th>
               </tr>
             </thead>
 
@@ -52,6 +72,7 @@ class ListToDosComponent extends Component {
                     <td>{todo.description}</td>
                     <td>{todo.done.toString()}</td>
                     <td>{todo.targetDate.toString()}</td>
+                    <td><button onClick={() => this.deleteTodoClicked(todo.id)} className="btn btn-danger">Delete</button></td>
                   </tr>
                 )
               }
