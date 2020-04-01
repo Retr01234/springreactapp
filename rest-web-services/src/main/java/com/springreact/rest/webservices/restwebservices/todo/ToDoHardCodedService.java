@@ -22,14 +22,15 @@ public class ToDoHardCodedService {
 		return todos;
 	}
 	
-	public Todo save(Todo todo) {
+	public Todo save(Todo todo) { // Save/Update Method
 		if(todo.getId()==-1 || todo.getId()==0) {
-			todo.setId(++idCounter);
-			todos.add(todo);
+			todo.setId(++idCounter); // Setting the Id + Incrementing by 1
+			todos.add(todo); // Adding the Id
 		} else {
-			deleteById(todo.getId());
-			todos.add(todo);
+			deleteById(todo.getId()); // Deleting the Id
+			todos.add(todo); // Adding the new Id
 		}
+		
 		return todo;
 	}
 	

@@ -7,14 +7,15 @@ import AuthenticationService from './AuthenticationService.js'
 class TodoComponent extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      id : 1,
+      id : this.props.match.params.id,
       description : '',
       targetDate : moment(new Date()).format('YYYY-MM-DD')
     }
 
-    this.onSubmit = this.onSubmit.bind(this)
-    this.validate = this.validate.bind(this)
+    this.onSubmit = this.onSubmit.bind(this);
+    this.validate = this.validate.bind(this);
   }
 
   componentDidMount() {
@@ -22,28 +23,30 @@ class TodoComponent extends Component {
       return;
     }
 
-    let username = AuthenticationService.getLoggedInUserName()
+    let username = AuthenticationService.getLoggedInUserName();
 
     TodoDataService.retrieveToDo(username, this.state.id).then(response => this.setState({
       description: response.data.description,
       targetDate: moment(response.data.targetDate).format('YYYY-MM-DD')
-    }))
+    }));
   }
 
   validate(values) {
     let errors = {};
     
+    // If Else to validate the Description Box
     if (!values.description) {
-      errors.description = 'Enter a Description'
+      errors.description = 'Enter a Description';
     } else if (values.description.length < 5) {
-      errors.description = 'Enter atleast 5 Characters in Description'
+      errors.description = 'Enter at least 5 Characters in Description';
     }
 
+    // If Statement to validate the fate
     if (!moment(values.targetDate).isValid()) {
-      errors.targetDate = 'Enter a valid Target Date'
+      errors.targetDate = 'Enter a valid Target Date';
     }
 
-    return errors
+    return errors;
   }
 
   onSubmit(values) {
@@ -55,10 +58,11 @@ class TodoComponent extends Component {
       targetDate: values.targetDate
     };
 
+    // If user updates or creates the new item, returns back to the list page
     if (this.state.id === -1) {
-      TodoDataService.createToDo(username, todo).then(() => this.props.history.push('/todos'));
+      TodoDataService.createToDo(username, todo).then(() => this.props.history.push('/list'));
     } else {
-      TodoDataService.updateToDo(username, this.state.id, todo).then(() => this.props.history.push('/todos'));
+      TodoDataService.updateToDo(username, this.state.id, todo).then(() => this.props.history.push('/list'));
     }
   }
 
@@ -70,13 +74,14 @@ class TodoComponent extends Component {
       <div>
         <h1>Todo</h1>
         <div className="container">
-          <Formik
-              initialValues={{ description, targetDate }}
-              onSubmit={this.onSubmit}
-              validateOnChange={false}
-              validateOnBlur={false}
-              validate={this.validate}
-              enableReinitialize={true}
+          {/*Inserting Formik Style Form*/}
+          <Formik 
+            initialValues={{ description, targetDate }}
+            onSubmit={this.onSubmit}
+            validateOnChange={false}
+            validateOnBlur={false}
+            validate={this.validate}
+            enableReinitialize={true}
           >
             {
               (props) => (

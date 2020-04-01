@@ -28,7 +28,7 @@ public class HelloWorldController {
 	// Whatever variable gets called gets mapped in the URI - {name}
 	@GetMapping(path = "/hello-world/path-variable/{name}")
 	public helloWorldBean helloWorldPathVar(@PathVariable String name) {
-		throw new RuntimeException("Hmm, something went wrong"); // When there is a mistake with the URI or anything else, it throws an error
-		// return new helloWorldBean (String.format("Hello World, %s", name));
+		//throw new RuntimeException("Hmm, something went wrong"); // When there is a mistake with the URI or anything else, it throws an error
+		return new helloWorldBean (String.format("Hello World, %s", name));
 	}
 }

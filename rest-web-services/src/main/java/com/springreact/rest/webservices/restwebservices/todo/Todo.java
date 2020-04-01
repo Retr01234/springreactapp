@@ -2,17 +2,28 @@ package com.springreact.rest.webservices.restwebservices.todo;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Todo {
 	// To Do Variables
+	@Id
+	@GeneratedValue
 	private long id;
 	private String username;
 	private String description;
 	private Date targetDate;
 	private boolean isDone;
 	
+	public Todo() {
+		
+	}
+	
 	// Constructor Generated using Fields
 	public Todo(long id, String username, String description, Date targetDate, boolean isDone) {
-		super();
+		super(); // Must use super() before listing variables
 		this.id = id;
 		this.username = username;
 		this.description = description;
