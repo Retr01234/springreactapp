@@ -69,8 +69,8 @@ class ListToDosComponent extends Component {
 							<tr>
 								<th>ID</th>
 								<th>Description</th>
-								<th>Done?</th>
 								<th>Target Date</th>
+								<th>Done?</th>
 								<th>Update</th>
 								<th>Delete</th>
 							</tr>

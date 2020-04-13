@@ -22,13 +22,22 @@ class LoginComponent extends Component {
   }
 
   loginClicked() {
-    if(this.state.username === 'babyyoda' && this.state.password === 'mando') {
+    // if(this.state.username === 'babyyoda' && this.state.password === 'mando') {
+    //   AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
+    //   this.props.history.push(`/home/${this.state.username}`); // Once logged in, redirect to home page
+    // } else {
+    //   this.setState({loginPassed : false});
+    //   this.setState({loginFailed : true});
+    // }
+
+    // Instead of hardcode username/password if else statement. We use an then catch for any user logged in
+    AuthenticationService.executeBasicAuthenticationService(this.state.username, this.state.password).then(() => {
       AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
-      this.props.history.push(`/home/${this.state.username}`); // Once logged in, redirect to home page
-    } else {
+      this.props.history.push(`/home/${this.state.username}`); // If login is successful redirect to page
+    }).catch(() => { // If false then false
       this.setState({loginPassed : false});
-      this.setState({loginFailed : true});
-    }
+      this.setState({loginFailed : false});
+    });
   }
 
   render() {

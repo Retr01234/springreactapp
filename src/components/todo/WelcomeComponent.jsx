@@ -53,9 +53,9 @@ class WelcomeComponent extends Component {
     let errorMessage = '';
 
     if (error.message)
-      errorMessage += error.message
+      errorMessage += error.message;
     if (error.response && error.response.data) {
-      errorMessage += error.response.data.message
+      errorMessage += error.response.data.message;
     }
 
     this.setState({ welcomeMessage: errorMessage });

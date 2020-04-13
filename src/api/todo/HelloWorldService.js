@@ -11,7 +11,18 @@ class HelloWorldService {
   }
 
   executeHelloWorldPathVariableService(name) {
-    return Axios.get(`http://localhost:8080/hello-world/path-variable/${name}`);
+    // let username = 'babyyoda';
+    // let password = 'mando';
+
+    // let basicAuthHeader = 'Basic ' + window.btoa(username + ":" + password); // Basic Auth Constructor
+
+    return Axios.get(`http://localhost:8080/hello-world/path-variable/${name}`,
+      // {
+      //   headers : {
+      //     authorization: basicAuthHeader // Using header to make a request
+      //   }
+      // }
+    );
   }
 }
 
