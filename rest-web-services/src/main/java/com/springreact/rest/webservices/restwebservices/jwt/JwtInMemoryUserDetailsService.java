@@ -15,8 +15,11 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
   static List<JwtUserDetails> inMemoryUserList = new ArrayList<>();
 
   static {
-    inMemoryUserList.add(new JwtUserDetails(1L, "in28minutes",
-        "$2a$10$3zHzb.Npv1hfZbLEU5qsdOju/tk2je6W6PnNnY.c1ujWPcZh4PL6e", "ROLE_USER_2"));
+    inMemoryUserList.add(new JwtUserDetails(1L, "babyyoda",
+        "$2a$10$UmN6PUFXlRKFMnv0WX0qauVBQmE.t90.O70pfWL73vG/kDfebM45i", "ROLE_USER_2"));
+    
+    inMemoryUserList.add(new JwtUserDetails(2L, "obiwan", 
+    	"$2a$10$BxR0zQeJiEa8s5ClMY10getQCFer7tARBXPVsrbjTHFVxnJCilBzK\r\n", "ROLE_USER_2"));
   }
 
   @Override
@@ -30,4 +33,7 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 
     return findFirst.get();
   }
+
 }
+
+

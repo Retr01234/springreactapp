@@ -22,3 +22,5 @@ public class JwtUnAuthorizedResponseAuthenticationEntryPoint implements Authenti
         "You would need to provide the Jwt Token to Access This resource");
   }
 }
+
+

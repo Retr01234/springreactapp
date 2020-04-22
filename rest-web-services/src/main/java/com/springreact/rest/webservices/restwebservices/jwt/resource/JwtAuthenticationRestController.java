@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springreact.rest.webservices.restwebservices.jwt.JwtTokenUtil;
 import com.springreact.rest.webservices.restwebservices.jwt.JwtUserDetails;
 
-
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
 public class JwtAuthenticationRestController {

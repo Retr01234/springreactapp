@@ -4,8 +4,9 @@ import AuthenticationService from './AuthenticationService.js';
 class LoginComponent extends Component {
   constructor(props) {
     super(props)
+    
     this.state = {
-      username: '',
+      username: 'babyyoda',
       password: '',
       loginFailed: false,
       loginPassed: true
@@ -31,12 +32,20 @@ class LoginComponent extends Component {
     // }
 
     // Instead of hardcode username/password if else statement. We use an then catch for any user logged in
-    AuthenticationService.executeBasicAuthenticationService(this.state.username, this.state.password).then(() => {
-      AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
+    // AuthenticationService.executeBasicAuthenticationService(this.state.username, this.state.password).then(() => {
+    //   AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
+    //   this.props.history.push(`/home/${this.state.username}`); // If login is successful redirect to page
+    // }).catch(() => { // If false then false
+    //   this.setState({loginPassed : false});
+    //   this.setState({loginFailed : false});
+    // });
+
+    AuthenticationService.executeJwtAuthenticationService(this.state.username, this.state.password).then((response) => {
+      AuthenticationService.registerSuccessfulLoginForJwt(this.state.username, response.data.token);
       this.props.history.push(`/home/${this.state.username}`); // If login is successful redirect to page
     }).catch(() => { // If false then false
       this.setState({loginPassed : false});
-      this.setState({loginFailed : false});
+      this.setState({loginFailed : true});
     });
   }
 
