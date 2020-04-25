@@ -12,7 +12,7 @@ public class Todo {
 	@Id
 	@GeneratedValue
 	private long id;
-	private String username;
+	private String username; // When using these in the DB we use small letters and _ for camel case words
 	private String description;
 	private Date targetDate;
 	private boolean isDone;
